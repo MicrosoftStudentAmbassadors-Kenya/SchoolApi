@@ -1,6 +1,7 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,25 +9,23 @@ namespace School_Management_System
 {
     public class Lecturer
     {
-        [PrimaryKey, AutoIncrement]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LecturerId { get; set; }
-        [NotNull]
+        [Required]
         public string FirstName { get; set; }
-        [NotNull]
+        [Required]
         public string LastName { get; set; }
         [MaxLength(2)]
         public int Age { get; set; }
-        [NotNull]
+        [Required]
         [MaxLength(8)]
         public long NationalId { get; set; }
+
+
         public Department Department { get; set; }
         public Address Address { get; set; }
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }
