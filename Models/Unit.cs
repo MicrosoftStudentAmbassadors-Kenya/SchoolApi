@@ -1,18 +1,19 @@
-﻿using SQLite;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace School_Management_System
 {
     public class Unit
     {
-        [PrimaryKey, AutoIncrement]
+        [Key]
         public int UnitId { get; set; }
 
-        [NotNull]
+        [Required]
         public string UnitName { get; set; }
+        [StringLength(100,MinimumLength = 10,ErrorMessage = "A unit must have some descriptions")]
         public string Description { get; set; }
-        public bool HasLab { get; set; }
+        public bool? HasLab { get; set; }
 
-        [NotNull]
+        [MaxLength(100,ErrorMessage = "UnitMark must not be more than 100marks")]
         public double UnitMark { get; set; }
         public Student Student { get; set; }
     }
