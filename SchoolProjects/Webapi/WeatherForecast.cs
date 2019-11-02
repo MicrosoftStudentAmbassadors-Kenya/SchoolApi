@@ -1,6 +1,6 @@
 using System;
 
-namespace SchoolApi
+namespace Webapi
 {
     public class WeatherForecast
     {
