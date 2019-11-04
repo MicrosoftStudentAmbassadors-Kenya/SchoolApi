@@ -18,7 +18,9 @@ namespace Domain
             public string DepartmentName { get; set; }
 
             public Course Course { get; set; }
+            [ForeignKey("StudentId")]
             public Student Student { get; set; }
+            [ForeignKey("LecturerId")]
             public Lecturer Lecturer { get; set; }
             public Address Address { get; set; }
         }
