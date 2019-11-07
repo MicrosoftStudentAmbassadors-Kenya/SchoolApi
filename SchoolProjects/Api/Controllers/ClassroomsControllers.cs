@@ -9,44 +9,44 @@ namespace Api.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class ValuesController : ControllerBase
+  public class ClassroomsController : ControllerBase
   {
 
     private readonly IMediator _mediator;
-    public ValuesController(IMediator mediator)
+    public ClassroomsController(IMediator mediator)
     {
       _mediator = mediator;
     }
     // GET api/values
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Value>>> Get()
+    public async Task<ActionResult<IEnumerable<Classroom>>> Get()
     {
-      var values = await _mediator.Send(new List.Query());
+      var values = await _mediator.Send(new ListClassRooms.Query());
       return Ok(values);
 
     }
 
     // GET api/values/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Value>> Get(int id)
+    public async Task<ActionResult<Classroom>> Get(int id)
     {
-      var value= await _mediator.Send(new Details.Query { Id= id });
+      var value= await _mediator.Send(new ClassroomDetails.Query(){Id=id});
       return Ok(value);
     }
 
     // POST api/values
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Value value)
+    public async Task<IActionResult> Post([FromBody] Classroom value)
     {
-      var result = await _mediator.Send(new Create.Command() { Id = value.Id, Name = value.Name });
+      var result = await _mediator.Send(new CreateClassroom.Command(){Name= value.ClassroomName});
       return Ok(result);
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] Value value)
+    public async Task<IActionResult> Put(int id, [FromBody] Classroom value)
     {
-      var result = await _mediator.Send(new Update.Command { Id = value.Id, Name = value.Name });
+      var result = await _mediator.Send(new UpdateClassroom.Command{Id=id,Name=value.ClassroomName});
       if(result ==null) return Ok(result);
       return NotFound();
 
@@ -56,7 +56,7 @@ namespace Api.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-      var result = await _mediator.Send(new Delete.Command { Id = id });
+      var result = await _mediator.Send(new DeleteClassroom.Command{Id = id});
       return Ok(result);
     }
   }
